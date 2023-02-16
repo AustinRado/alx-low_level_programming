@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 /**
  *main - serves as entry point of the program
  *prints to the stdout using printf()
