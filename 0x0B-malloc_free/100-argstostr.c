@@ -1,41 +1,42 @@
-#include "main.h"
-#include <stdlib.h>
 #include <stdio.h>
-
+#include <stdlib.h>
+#include "main.h"
 /**
-* *argstostr - concat all agrumnets of your program
-* @ac: int value to check
-* @av: array of values for the argumnt vector
-*
-* Return: array
-*/
-
+ * argstostr - main entry
+ * @ac: int input
+ * @av: double pointer array
+ * Return: 0
+ */
 char *argstostr(int ac, char **av)
 {
-	int x, y, i, j, l = 0, a = 0;
-	char *b;
+	int i, n, k = 0, len = 0;
+	char *str;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
-	for (i = 0; (i < ac); i++)
+
+	for (i = 0; i < ac; i++)
 	{
-		for  (j = 0; av[i][j] != '\0'; j++)
-			j++;
-		i++;
+		for (n = 0; av[i][n]; n++)
+			len++;
 	}
-	l += 1;
-	b = malloc(l * sizeof(char));
-	if (b == NULL)
+	len += ac;
+
+	str = malloc(sizeof(char) * len + 1);
+	if (str == NULL)
 		return (NULL);
-	for (x = 0; x < ac; x++)
+
+	for (i = 0; i < ac; i++)
 	{
-		for (y = 0; av[x][y] != '\0'; y++)
+		for (n = 0; av[i][n]; n++)
 		{
-			b[a] = av[x][y];
-			a++;
+			str[k] = av[i][n];
+			k++;
 		}
-		b[a++] = '\n';
+		if (str[k] == '\0')
+		{
+			str[k++] = '\n';
+		}
 	}
-	b[a] = '\0';
-	return (b);
+	return (str);
 }
