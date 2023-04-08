@@ -7,21 +7,24 @@
 
 void print_binary(unsigned long int n)
 {
-	unsigned long int num;
-	int i;
-	char buffer[64];
+	unsigned long int mask = 1UL << ((sizeof(unsigned long int) * 8) - 1);
+	int flag = 0;
 
-	if (n == 0)
+	while (mask)
+	{
+		if (n & mask)
+		{
+			flag = 1;
+			printf("1");
+		}
+		else if (flag)
+		{
+			printf("0");
+		}
+		mask = mask >> 1;
+	}
+	if (!flag)
 	{
 		printf("0");
-		return;
 	}
-
-	num = n;
-
-	for (i = 0; n != 0; n = n >> 1, i++)
-		;
-	for (i -= 1; i >= 0; i--)
-		buffer[i] = (num >> i) & 1 ? '1' : '0';
-	printf("%s", buffer);
 }
