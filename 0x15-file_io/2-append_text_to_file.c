@@ -24,7 +24,7 @@ if (fd == -1)
 
 if (text_content)
 {
-	text_len = strlen(text_content);
+	for (text_len = 0; text_content[text_len]; text_len++);
 	num_bytes_written = write(fd, text_content, text_len);
 	if (num_bytes_written != text_len)
 	{
