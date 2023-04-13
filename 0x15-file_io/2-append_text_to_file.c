@@ -1,5 +1,4 @@
 #include "main.h"
-#include "string.h"
 
 /**
  * append_text_to_file - entry point, appends text at
@@ -11,28 +10,25 @@
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int fd;
-	ssize_t num_bytes_written = 0;
-	int text_len = 0;
+	int fd, numletter, rwr;
 
-if (!filename)
-return (-1);
-
-fd = open(filename, O_WRONLY | O_APPEND);
-if (fd == -1)
+	if (filename == NULL)
+		return (-1);
+	fd = open(filename, O_WRONLY | O_APPEND);
+	if (fd == -1)
 	return (-1);
-
-if (text_content)
-{
-	for (text_len = 0; text_content[text_len]; text_len++);
-	num_bytes_written = write(fd, text_content, text_len);
-	if (num_bytes_written != text_len)
+	if (text_content != NULL)
 	{
-		close(fd);
+		numletter = 0;
+		while (text_content[numletter] != '\0')
+			numletter++;
+		rwr = write(fd, text_content, numletter);
+		if (rwr == -1)
+		{
+			close(fd);
 			return (-1);
+		}
 	}
-}
-
-close(fd);
-return (-1);
+	close(fd);
+	return (1);
 }
