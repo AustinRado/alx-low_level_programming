@@ -1,19 +1,15 @@
 #include "main.h"
-#include <stdio.h>
-
 /**
- * main - this is the entry point
- * @argc: num of arg passed to the program
- * @argv: this the array of arg
- *
- * Return: 0
- */
-
+ * main - copies the content of a file to another file
+ * @argc: number of arguments passed to the program
+ * @argv: array of arguments
+ * Return: Always 0 (Success)
+*/
 int main(int argc, char *argv[])
 {
 	int fdf, fdt, close_ff, close_ft;
 	ssize_t file_from, file_to;
-	char buf[BUF_SIZE];
+	char buffer[BUF_SIZE];
 
 	if (argc != 3)
 	{
@@ -27,8 +23,8 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 	fdt = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	file_from = read(fdf, buf, BUF_SIZE);
-	file_to = write(fdt, buf, file_from);
+	file_from = read(fdf, buffer, BUF_SIZE);
+	file_to = write(fdt, buffer, file_from);
 	while (file_from > 0)
 	{
 		if (file_to < 0 || file_to != file_from)
