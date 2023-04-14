@@ -5,7 +5,7 @@
  * error_file -entry point,check if files
  * can be open
  * @file_from: source file descriptor
- * @file_to: destination file descripto
+ * @file_to: destination file descripton
  * @file_from_name: source file name
  * @file_to_name: destination file name
  *
@@ -51,10 +51,11 @@ int main(int argc, char *argv[])
 
 	while ((num_read = read(file_from, buf, BUF_SIZE)) > 0)
 	{
-		num_written = write(file_to, buf, num_read);
-		if (num_written == -1)
-			error_file(-1, file_to, argv[1], argv[2]);
+	num_written = write(file_to, buf, num_read);
+	if (num_written == -1)
+		error_file(-1, file_to, argv[1], argv[2]);
 	}
+
 	if (num_read == -1)
 		error_file(-1, file_to, argv[1], argv[2]);
 
@@ -72,5 +73,3 @@ int main(int argc, char *argv[])
 	}
 	return (0);
 }
-
-
