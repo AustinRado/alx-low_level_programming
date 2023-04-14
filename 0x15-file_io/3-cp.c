@@ -11,8 +11,8 @@
 
 int main(int argc, char *argv[])
 {
-int from, to, rd_bytes;
-char buff[BUFFER_SIZE];
+int from, to, just_bytes;
+char buff[BUFF_SIZE];
 
 if (argc != 3)
 {
@@ -29,16 +29,16 @@ exit(98);
 
 to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
-while ((rd_bytes = read(from, buff, BUFFER_SIZE)) > 0)
+while ((just_bytes = read(from, buff, BUFF_SIZE)) > 0)
 {
-if (to == -1 || write(to, buff, rd_bytes) == -1)
+if (to == -1 || write(to, buff, just_bytes) == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 exit(99);
 }
 }
 
-if (rd_bytes == -1)
+if (just_bytes == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 exit(98);
