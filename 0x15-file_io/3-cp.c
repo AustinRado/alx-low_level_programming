@@ -25,8 +25,6 @@ void error_file(int file_from, int file_to, char *file_from_name,
 		exit(99);
 	}
 }
-#include "main.h"
-#include <stdio.h>
 
 /**
  * main - checking code for ALX student
@@ -39,7 +37,7 @@ int main(int argc, char *argv[])
 {
 	int file_from, file_to, err_close;
 	ssize_t num_read, num_written;
-	char buf[1024];
+	char buf[BUF_SIZE];
 
 	if (argc != 3)
 	{
@@ -51,7 +49,7 @@ int main(int argc, char *argv[])
 	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	error_file(file_from, file_to, argv[1], argv[2]);
 
-	while ((num_read = read(file_from, buf, 1024)) > 0)
+	while ((num_read = read(file_from, buf, BUF_SIZE)) > 0)
 	{
 		num_written = write(file_to, buf, num_read);
 		if (num_written == -1)
