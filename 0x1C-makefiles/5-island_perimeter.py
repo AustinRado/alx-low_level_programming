@@ -1,26 +1,47 @@
 #!/usr/bin/python3
+"""Defines a function to determine the perimiter of an island"""
+
 
 def island_perimeter(grid):
-    """
-    Calculate the perimeter of the island as described in grid.
+    """Determine the perimeter of a grid"""
 
-    Args:
-    grid (List[List[int]]): The grid representing the island.
+    height = len(grid)
+    if grid[0]:
+        width = len(grid[0])
 
-    Returns:
-    int: The perimeter of the island.
-    """
-    rows = len(grid)
-    cols = len(grid[0])
     perimeter = 0
 
-    for row in range(rows):
-        for col in range(cols):
-            if grid[row][col] == 1:
-                perimeter += 4
-                if row > 0 and grid[row - 1][col] == 1:
-                    perimeter -= 2
-                if col > 0 and grid[row][col - 1] == 1:
-                    perimeter -= 2
+    for row_i, row in enumerate(grid):  # for each row
+        for col_i, col in enumerate(row):  # checking each unit of row
+
+            if col is 1:  # if index is land
+
+                # check above block
+                if row_i is 0:
+                    perimeter = perimeter + 1
+                else:
+                    if grid[row_i - 1][col_i] is not 1:
+                        perimeter = perimeter + 1
+
+                # check left block
+                if col_i is 0:
+                    perimeter = perimeter + 1
+                else:
+                    if grid[row_i][col_i - 1] is not 1:
+                        perimeter = perimeter + 1
+
+                # check right block
+                if col_i is (width - 1):
+                    perimeter = perimeter + 1
+                else:
+                    if grid[row_i][col_i + 1] is not 1:
+                        perimeter = perimeter + 1
+
+                # check below block
+                if row_i is (height - 1):
+                    perimeter = perimeter + 1
+                else:
+                    if grid[row_i + 1][col_i] is not 1:
+                        perimeter = perimeter + 1
 
     return perimeter
